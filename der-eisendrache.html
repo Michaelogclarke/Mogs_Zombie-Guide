@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Der Eisendrache Guide — BO3 Zombies</title>
+  <meta name="description" content="Complete guide for Der Eisendrache — all 4 bow upgrades, Ragnarok DG-4 parts, Rocket Shield locations, and Pack-a-Punch unlock.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── design tokens (mirrors main site) ── */
+    :root {
+      --bg:     #080807;
+      --bg-mid: #0f0e0d;
+      --bg-card:#141312;
+      --bg-lift:#1c1a18;
+
+      --orange:     #ff6200;
+      --orange-dim: rgba(255,98,0,0.12);
+      --orange-glow:rgba(255,98,0,0.60);
+      --orange-bdr: rgba(255,98,0,0.32);
+
+      --red:        #cc1100;
+      --red-dim:    rgba(204,17,0,0.12);
+      --red-glow:   rgba(204,17,0,0.55);
+
+      --text:  #e8e0d8;
+      --dim:   #6b6055;
+      --faint: rgba(255,255,255,0.055);
+      --mid:   rgba(255,255,255,0.09);
+
+      /* bow accent colours */
+      --wolf:   #c0c0c0;   /* steel silver  */
+      --void:   #9933dd;   /* deep violet   */
+      --fire:   #ff4400;   /* inferno red   */
+      --storm:  #ffdd00;   /* electric gold */
+
+      --f-disp: 'Bebas Neue', sans-serif;
+      --f-head: 'Oswald', sans-serif;
+      --f-body: 'Barlow Condensed', sans-serif;
+
+      --nav-h: 62px;
+      --t: 0.2s ease;
+    }
+
+    /* ── reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 56px); }
+    body { background: var(--bg); color: var(--text); font-family: var(--f-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+    a  { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ── texture layers ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        repeating-linear-gradient(0deg,   transparent 0, transparent 3px, rgba(255,255,255,0.011) 3px, rgba(255,255,255,0.011) 4px),
+        repeating-linear-gradient(90deg,  transparent 0, transparent 59px, rgba(255,98,0,0.013) 59px, rgba(255,98,0,0.013) 60px);
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.038;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-size: 260px 260px;
+    }
+    nav, main, footer, header { position: relative; z-index: 1; }
+
+    /* ── nav (matches main site) ── */
+    .nav {
+      position: fixed; inset: 0 0 auto 0; height: var(--nav-h); z-index: 900;
+      background: rgba(8,8,7,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--faint);
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .nav.scrolled { background: rgba(8,8,7,0.97); border-bottom-color: var(--orange-bdr); }
+    .nav__row { max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .nav__logo { font-family: var(--f-disp); font-size: 1.35rem; letter-spacing: 0.13em; transition: color var(--t); }
+    .nav__logo b { color: var(--orange); font-weight: 400; text-shadow: 0 0 16px var(--orange-glow); }
+    .nav__logo:hover { color: var(--orange); }
+    .nav__links { display: none; gap: 0.1rem; }
+    .nav__links a {
+      display: block; padding: 0.34rem 0.8rem;
+      font-family: var(--f-head); font-size: 0.79rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);
+      border: 1px solid transparent; border-radius: 2px;
+      transition: color var(--t), border-color var(--t), background var(--t), box-shadow var(--t);
+    }
+    .nav__links a:hover { color: var(--orange); border-color: var(--orange-bdr); background: var(--orange-dim); box-shadow: 0 0 12px rgba(255,98,0,0.16); }
+    .ham { display: flex; flex-direction: column; gap: 5px; padding: 8px; background: none; border: none; cursor: pointer; }
+    .ham span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 1px; transition: transform 0.28s, opacity 0.28s, background 0.28s; }
+    .ham[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg);  background: var(--orange); }
+    .ham[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .ham[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--orange); }
+    .drawer {
+      position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 899;
+      background: rgba(8,8,7,0.97); border-bottom: 1px solid var(--orange-bdr);
+      padding: 0.5rem 1.5rem 1rem; display: none;
+      opacity: 0; pointer-events: none; transform: translateY(-6px);
+      transition: opacity 0.24s, transform 0.24s;
+    }
+    .drawer.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .drawer a { display: block; padding: 0.65rem 0.5rem 0.65rem 1rem; font-family: var(--f-head); font-size: 0.9rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dim); border-left: 2px solid transparent; transition: color var(--t), border-color var(--t), padding var(--t); }
+    .drawer a:hover { color: var(--orange); border-left-color: var(--orange); padding-left: 1.35rem; }
+    @media (min-width: 1024px) { .nav__links { display: flex; } .ham { display: none; } }
+    @media (max-width: 1023px) { .ham { display: flex; } .drawer { display: block; } }
+
+    /* ── map hero header ── */
+    .map-hero {
+      padding: calc(var(--nav-h) + 4rem) 1.5rem 4rem;
+      position: relative; overflow: hidden;
+      background: var(--bg-mid);
+      border-bottom: 1px solid var(--faint);
+    }
+    .map-hero::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 80% at 15% 60%, rgba(255,98,0,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 50% at 90% 20%, rgba(140,30,0,0.05) 0%, transparent 60%);
+    }
+    .map-hero::after {
+      content: 'DER EISENDRACHE';
+      position: absolute; right: -0.04em; bottom: -0.12em;
+      font-family: var(--f-disp); font-size: clamp(5rem, 18vw, 14rem);
+      line-height: 1; letter-spacing: -0.01em;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,98,0,0.055);
+      white-space: nowrap; pointer-events: none; user-select: none;
+    }
+    .map-hero__inner { max-width: 1160px; margin: 0 auto; position: relative; z-index: 2; }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-family: var(--f-head); font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--dim); margin-bottom: 1.5rem;
+    }
+    .breadcrumb a:hover { color: var(--orange); }
+    .breadcrumb span { opacity: 0.4; }
+
+    .map-hero__badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+    .bdg {
+      font-family: var(--f-head); font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.18rem 0.6rem; border-radius: 1px; border: 1px solid;
+    }
+    .bdg--dlc   { color: var(--orange); border-color: var(--orange-bdr); background: var(--orange-dim); }
+    .bdg--diff  { color: var(--dim);    border-color: var(--mid);        background: transparent; }
+    .bdg--year  { color: var(--dim);    border-color: var(--mid);        background: transparent; }
+
+    .map-hero h1 {
+      font-family: var(--f-disp);
+      font-size: clamp(3rem, 10vw, 7rem);
+      line-height: 0.9; letter-spacing: 0.04em;
+      color: var(--text);
+      text-shadow: 0 2px 40px rgba(255,98,0,0.15);
+      margin-bottom: 0.6rem;
+    }
+    .map-hero__sub {
+      font-family: var(--f-head); font-size: 0.85rem; font-weight: 300;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--dim); margin-bottom: 2rem;
+    }
+
+    /* info pills */
+    .info-row { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    .info-pill { display: flex; flex-direction: column; }
+    .info-pill__val { font-family: var(--f-disp); font-size: 1.6rem; line-height: 1; color: var(--orange); text-shadow: 0 0 14px var(--orange-glow); }
+    .info-pill__lbl { font-family: var(--f-head); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); }
+
+    /* ── sticky section TOC ── */
+    .guide-toc {
+      position: sticky; top: var(--nav-h); z-index: 50;
+      background: rgba(8,8,7,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--faint);
+      overflow-x: auto;
+    }
+    .guide-toc__inner { max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; display: flex; gap: 0; }
+    .guide-toc a {
+      display: block; padding: 0.8rem 1rem;
+      font-family: var(--f-head); font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--dim); white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color var(--t), border-color var(--t);
+    }
+    .guide-toc a:hover { color: var(--orange); border-bottom-color: var(--orange); }
+
+    /* ── page layout ── */
+    .guide-body { max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; }
+    .guide-sec { padding: 60px 0; border-bottom: 1px solid var(--faint); }
+    .guide-sec:last-child { border-bottom: none; }
+
+    /* section heading */
+    .sec-label {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--f-head); font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 0.8rem;
+    }
+    .sec-label::before { content: ''; display: block; width: 24px; height: 2px; background: var(--orange); box-shadow: 0 0 8px var(--orange-glow); }
+    .sec-label--col { color: var(--col, var(--orange)); }
+    .sec-label--col::before { background: var(--col, var(--orange)); box-shadow: 0 0 8px color-mix(in srgb, var(--col, var(--orange)) 70%, transparent); }
+
+    .sec-title { font-family: var(--f-disp); font-size: clamp(2rem, 5vw, 3rem); letter-spacing: 0.06em; line-height: 1; margin-bottom: 0.4rem; }
+    .sec-desc  { font-size: 0.9rem; font-weight: 300; color: var(--dim); max-width: 680px; line-height: 1.65; margin-bottom: 2rem; }
+
+    /* ── bow section accent header ── */
+    .bow-header {
+      border-left: 4px solid var(--col, var(--orange));
+      box-shadow: -4px 0 18px color-mix(in srgb, var(--col, var(--orange)) 50%, transparent);
+      padding: 1.5rem 1.5rem 1.5rem 1.75rem;
+      background: var(--bg-card);
+      border-radius: 0 2px 2px 0;
+      margin-bottom: 2rem;
+    }
+    .bow-header__tag {
+      font-family: var(--f-head); font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--col, var(--orange));
+      margin-bottom: 0.5rem;
+    }
+    .bow-header__name {
+      font-family: var(--f-disp); font-size: clamp(2rem, 5vw, 3.2rem);
+      letter-spacing: 0.05em; line-height: 1;
+      color: var(--col, var(--orange));
+      text-shadow: 0 0 30px color-mix(in srgb, var(--col, var(--orange)) 60%, transparent);
+      margin-bottom: 0.3rem;
+    }
+    .bow-header__aka { font-family: var(--f-head); font-size: 0.78rem; font-weight: 300; letter-spacing: 0.1em; color: var(--dim); }
+    .bow-header__effect {
+      margin-top: 0.75rem;
+      font-size: 0.88rem; font-weight: 300; color: var(--dim); line-height: 1.55;
+    }
+
+    /* ── step list ── */
+    .steps { display: flex; flex-direction: column; gap: 1px; margin-bottom: 2rem; counter-reset: steps; }
+    .step {
+      counter-increment: steps;
+      background: var(--bg-card);
+      border: 1px solid var(--faint);
+      border-radius: 2px;
+      padding: 1.1rem 1.4rem 1.1rem 4.5rem;
+      position: relative;
+      transition: background var(--t), border-color var(--t);
+    }
+    .step::before {
+      content: counter(steps);
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3.5rem;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--f-disp); font-size: 1.4rem;
+      color: var(--col, var(--orange));
+      border-right: 1px solid var(--faint);
+      opacity: 0.6;
+    }
+    .step:hover { background: var(--bg-lift); border-color: rgba(255,98,0,0.2); }
+    .step h4 { font-family: var(--f-head); font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em; color: var(--text); margin-bottom: 0.3rem; }
+    .step p  { font-size: 0.85rem; font-weight: 300; color: var(--dim); line-height: 1.55; }
+
+    /* ── screenshot placeholder ── */
+    .shot {
+      background: var(--bg-card);
+      border: 1px solid var(--faint);
+      border-radius: 2px;
+      padding: 0;
+      overflow: hidden;
+      margin: 1.25rem 0;
+    }
+    .shot__frame {
+      aspect-ratio: 16/9;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.75rem;
+      background:
+        repeating-linear-gradient(-45deg, transparent 0, transparent 8px, rgba(255,255,255,0.012) 8px, rgba(255,255,255,0.012) 9px);
+      border-bottom: 1px solid var(--faint);
+    }
+    .shot__icon {
+      font-size: 2rem; opacity: 0.18; line-height: 1;
+      color: var(--orange);
+    }
+    .shot__hint {
+      font-family: var(--f-head); font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--dim); opacity: 0.7;
+      text-align: center; padding: 0 1rem;
+    }
+    .shot__cap {
+      padding: 0.6rem 1rem;
+      font-size: 0.78rem; font-weight: 300; color: var(--dim); font-style: italic;
+    }
+
+    /* ── callout boxes ── */
+    .callout {
+      padding: 1rem 1.25rem 1rem 3.75rem;
+      border-radius: 2px;
+      position: relative;
+      margin: 1.25rem 0;
+      font-size: 0.87rem; font-weight: 300; line-height: 1.6;
+    }
+    .callout::before {
+      position: absolute; left: 1.1rem; top: 1rem;
+      font-family: var(--f-head); font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .callout--tip {
+      background: rgba(255,98,0,0.08);
+      border: 1px solid rgba(255,98,0,0.25);
+      color: var(--text);
+    }
+    .callout--tip::before { content: 'TIP'; color: var(--orange); }
+    .callout--warn {
+      background: rgba(204,17,0,0.1);
+      border: 1px solid rgba(204,17,0,0.3);
+      color: var(--text);
+    }
+    .callout--warn::before { content: 'NOTE'; color: #ff4444; }
+    .callout--prereq {
+      background: rgba(255,221,0,0.07);
+      border: 1px solid rgba(255,221,0,0.2);
+      color: var(--text);
+    }
+    .callout--prereq::before { content: 'BEFORE YOU START'; color: var(--storm); }
+
+    /* ── two-column layout for parts ── */
+    .parts-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+    .part-card {
+      background: var(--bg-card);
+      border: 1px solid var(--faint);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: border-color var(--t), background var(--t);
+    }
+    .part-card:hover { background: var(--bg-lift); border-color: rgba(255,98,0,0.28); }
+    .part-card__head {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.025);
+      border-bottom: 1px solid var(--faint);
+    }
+    .part-num {
+      font-family: var(--f-disp); font-size: 1.5rem; line-height: 1;
+      color: var(--orange); opacity: 0.7;
+      flex-shrink: 0;
+    }
+    .part-name { font-family: var(--f-head); font-size: 0.88rem; font-weight: 600; letter-spacing: 0.06em; color: var(--text); }
+    .part-card__body { padding: 1rem; }
+    .part-card__body p { font-size: 0.85rem; font-weight: 300; color: var(--dim); line-height: 1.6; }
+    .spawn-list { margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.3rem; }
+    .spawn-list li {
+      font-size: 0.82rem; font-weight: 300; color: var(--dim);
+      padding: 0.3rem 0 0.3rem 1rem;
+      border-left: 2px solid rgba(255,98,0,0.25);
+    }
+    .spawn-list li::before { content: '↳ '; color: var(--orange); opacity: 0.7; }
+
+    /* ── two column steps + screenshot ── */
+    .step-with-shot { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 1.5rem; align-items: start; }
+
+    /* ── section divider ── */
+    .bow-divider {
+      display: flex; align-items: center; gap: 1rem;
+      margin: 3rem 0;
+    }
+    .bow-divider::before, .bow-divider::after { content: ''; flex: 1; height: 1px; background: var(--faint); }
+    .bow-divider span { font-family: var(--f-head); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); white-space: nowrap; }
+
+    /* ── responsive ── */
+    @media (min-width: 768px) {
+      .parts-grid       { grid-template-columns: repeat(3, 1fr); }
+      .step-with-shot   { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ── footer ── */
+    .foot {
+      background: var(--bg-mid); border-top: 1px solid var(--faint);
+      padding: 3rem 1.5rem 2rem; position: relative;
+    }
+    .foot::before {
+      content: '';
+      position: absolute; top: -1px; left: 8%; right: 8%; height: 1px;
+      background: linear-gradient(to right, transparent, var(--orange), transparent);
+      box-shadow: 0 0 14px var(--orange-glow);
+    }
+    .foot__inner { max-width: 1160px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+    .foot__back {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--f-head); font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--orange);
+      transition: text-shadow var(--t);
+    }
+    .foot__back:hover { text-shadow: 0 0 10px var(--orange-glow); }
+    .foot__back::before { content: '←'; }
+    .foot__disc { font-size: 0.76rem; font-style: italic; color: var(--dim); opacity: 0.6; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAV ═══ -->
+  <nav class="nav" id="mainNav">
+    <div class="nav__row">
+      <a href="index.html" class="nav__logo">BO3 <b>ZOMBIES</b></a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html#maps">Maps</a></li>
+        <li><a href="#pack-a-punch">Pack-a-Punch</a></li>
+        <li><a href="#bows">Bows</a></li>
+        <li><a href="#dg4">DG-4</a></li>
+        <li><a href="#shield">Shield</a></li>
+      </ul>
+      <button class="ham" id="ham" aria-expanded="false" aria-controls="drawer" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <a href="index.html" class="dl">← Back to Hub</a>
+    <a href="index.html#maps"   class="dl">All Maps</a>
+    <a href="#pack-a-punch"     class="dl">Pack-a-Punch</a>
+    <a href="#dragon-heads"     class="dl">Dragon Heads</a>
+    <a href="#bows"             class="dl">Wrath of the Ancients</a>
+    <a href="#wolf-bow"         class="dl">Wolf Bow</a>
+    <a href="#void-bow"         class="dl">Void Bow</a>
+    <a href="#fire-bow"         class="dl">Fire Bow</a>
+    <a href="#storm-bow"        class="dl">Storm Bow</a>
+    <a href="#dg4"              class="dl">Ragnarok DG-4</a>
+    <a href="#shield"           class="dl">Rocket Shield</a>
+  </div>
+
+
+  <!-- ═══ MAP HEADER ═══ -->
+  <header class="map-hero" id="top">
+    <div class="map-hero__inner">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <a href="index.html#maps">Maps</a>
+        <span>/</span>
+        <span style="color:var(--text)">Der Eisendrache</span>
+      </div>
+
+      <div class="map-hero__badges">
+        <span class="bdg bdg--dlc">DLC 1 — Awakening</span>
+        <span class="bdg bdg--diff">Difficulty ★★★☆☆</span>
+        <span class="bdg bdg--year">January 2016</span>
+      </div>
+
+      <h1>Der Eisendrache</h1>
+      <p class="map-hero__sub">Group 935 · Austrian Castle · 1945</p>
+
+      <div class="info-row">
+        <div class="info-pill">
+          <span class="info-pill__val">4</span>
+          <span class="info-pill__lbl">Elemental Bows</span>
+        </div>
+        <div class="info-pill">
+          <span class="info-pill__val">3</span>
+          <span class="info-pill__lbl">Dragon Heads</span>
+        </div>
+        <div class="info-pill">
+          <span class="info-pill__val">2</span>
+          <span class="info-pill__lbl">Wonder Weapons</span>
+        </div>
+        <div class="info-pill">
+          <span class="info-pill__val">4</span>
+          <span class="info-pill__lbl">Max Players</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ STICKY TOC ═══ -->
+  <nav class="guide-toc" aria-label="Guide sections">
+    <div class="guide-toc__inner">
+      <a href="#pack-a-punch">Pack-a-Punch</a>
+      <a href="#dragon-heads">Dragon Heads</a>
+      <a href="#bows">Base Bow</a>
+      <a href="#wolf-bow">Wolf Bow</a>
+      <a href="#void-bow">Void Bow</a>
+      <a href="#fire-bow">Fire Bow</a>
+      <a href="#storm-bow">Storm Bow</a>
+      <a href="#dg4">DG-4</a>
+      <a href="#shield">Shield</a>
+    </div>
+  </nav>
+
+
+  <main>
+    <div class="guide-body">
+
+
+      <!-- ══════════════════════════════════════
+           PACK-A-PUNCH
+      ══════════════════════════════════════ -->
+      <section class="guide-sec" id="pack-a-punch">
+        <div class="sec-label">Step Zero</div>
+        <h2 class="sec-title">Pack-a-Punch</h2>
+        <p class="sec-desc">PaP must be unlocked before you can upgrade any weapon. It requires activating three teleporter pads scattered around the castle. Do this early — ideally before round 10.</p>
+
+        <div class="steps">
+          <div class="step">
+            <h4>Turn on the Power</h4>
+            <p>Follow the power cable symbols on the walls from the starting area. The power switch is in the lower castle. Activating it enables the teleporter pads and opens the gate to the Undercroft.</p>
+          </div>
+          <div class="step">
+            <h4>Activate All Three Teleporter Pads</h4>
+            <p>Find and interact with each of the three glowing teleporter pads around the map — one in the Upper Courtyard, one near the Clock Tower, and one in the Undercroft. Step on each pad and hold the interact button to link them.</p>
+          </div>
+          <div class="step">
+            <h4>Access the Pack-a-Punch</h4>
+            <p>Once all three pads are linked, the Pack-a-Punch machine appears in the Pyramid Room inside the Undercroft. It costs 5,000 points per upgrade. The room also features low-gravity — use the four floor plates around the Pyramid to toggle it.</p>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot__frame">
+            <div class="shot__icon">⬡</div>
+            <div class="shot__hint">Screenshot — Power switch location (lower castle corridor)</div>
+          </div>
+          <div class="shot__cap">The power generator is marked by glowing cable symbols running along the walls from spawn. Follow them down.</div>
+        </div>
+
+        <div class="callout callout--tip">
+          You can use the Wunderspheres (glowing launch pads) to travel quickly between areas. They cost nothing and are the fastest way to loop between the courtyard, clock tower, and undercroft.
+        </div>
+      </section>
+
+
+      <!-- ══════════════════════════════════════
+           DRAGON HEADS — PREREQUISITE
+      ══════════════════════════════════════ -->
+      <section class="guide-sec" id="dragon-heads">
+        <div class="sec-label">Prerequisite for All Bows</div>
+        <h2 class="sec-title">Dragon Heads</h2>
+        <p class="sec-desc">Before the Wrath of the Ancients bow becomes available to purchase off the wall, you must awaken all three dragon heads by feeding them zombie kills. You need roughly 8–9 kills in front of each head. The bow wall buys only appear once all three are satisfied.</p>
+
+        <div class="callout callout--warn">
+          This step is easy to miss. If the bow isn't appearing on the wall, you haven't fed all three dragon heads yet.
+        </div>
+
+        <div class="parts-grid">
+          <div class="part-card">
+            <div class="part-card__head">
+              <div class="part-num">01</div>
+              <div class="part-name">Lower Courtyard Dragon</div>
+            </div>
+            <div class="part-card__body">
+              <p>Located at the far end of the Lower Courtyard, past the Double Tap machine. Face the dragon head and get kills in its eyeline. It will glow and smoke when fully awakened.</p>
+            </div>
+          </div>
+
+          <div class="part-card">
+            <div class="part-card__head">
+              <div class="part-num">02</div>
+              <div class="part-name">Control Room Dragon</div>
+            </div>
+            <div class="part-card__body">
+              <p>Found in the Control Room area adjacent to the main courtyard. Get kills directly in front of the carved head — the mouth opens wider with each kill, then clamps shut when satisfied.</p>
+            </div>
+          </div>
+
+          <div class="part-card">
+            <div class="part-card__head">
+              <div class="part-num">03</div>
+              <div class="part-name">Undercroft Dragon</div>
+            </div>
+            <div class="part-card__body">
+              <p>In the basement of the Control Room, accessible after the power is on. Feed it the same way — walk past it slowly while getting kills so the kills register within range of its head.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot__frame">
+            <div class="shot__icon">⬡</div>
+            <div class="shot__hint">Screenshot — Dragon head fully awakened (glowing red, mouth open)</div>
+          </div>
+          <div class="shot__cap">An awakened dragon head glows brightly and opens fully. An unfed head sits dark and closed.</div>
+        </div>
+      </section>
+
+
+      <!-- ══════════════════════════════════════
+           WRATH OF THE ANCIENTS — BASE BOW
+      ══════════════════════════════════════ -->
+      <section class="guide-sec" id="bows">
+        <div class="sec-label">Wonder Weapon</div>
+        <h2 class="sec-title">Wrath of the Ancients</h2>
+        <p class="sec-desc">The base bow — available off the wall for 500 points once all three dragon heads are fed. It's a solid weapon early on, but falls off past round 20. Upgrade it into one of the four elemental variants as soon as possible. You can only hold one elemental version at a time.</p>
+
+        <div class="step-with-shot">
+          <div>
+            <div class="steps">
+              <div class="step">
+                <h4>Buy from the Wall (500 Points)</h4>
+                <p>Two wall buy locations: one in the Bastion area near the Upper Courtyard, and one in the lower passage near the Clock Tower stairs. After feeding the dragons, a glowing bow symbol appears on the wall.</p>
+              </div>
+              <div class="step">
+                <h4>Pack-a-Punch It First</h4>
+                <p>Before starting any bow upgrade quest, PaP the Wrath of the Ancients for 5,000 points. The upgraded version (called the "Wrath of the Ancients PaP") deals significantly more damage and is required for some bow upgrade steps to work properly.</p>
+              </div>
+              <div class="step">
+                <h4>Choose Your Upgrade Path</h4>
+                <p>The four elemental upgrades — Wolf, Void, Fire, and Storm — can be completed in any order. Each requires a separate quest chain. You can only carry one upgraded bow, so choose based on your playstyle. Wolf is easiest for beginners; Storm has the highest damage ceiling.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="shot">
+              <div class="shot__frame">
+                <div class="shot__icon">⬡</div>
+                <div class="shot__hint">Screenshot — Wall buy location near the Bastion / Upper Courtyard</div>
+              </div>
+              <div class="shot__cap">The bow wall buy glows with a faint golden aura. It only appears after all three dragon heads are fed.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ══════════════════════════════════════
+           WOLF BOW
+      ══════════════════════════════════════ -->
+      <div class="bow-divider"><span>Bow Upgrade 1</span></div>
+
+      <section class="guide-sec" id="wolf-bow">
+        <div class="bow-header" style="--col:var(--wolf);">
+          <div class="bow-header__tag">Elemental Upgrade · Wolf</div>
+          <div class="bow-header__name">Wolf Bow</div>
+          <div class="bow-header__aka">Kreeholo lu Kreemasaleet</div>
+          <div class="bow-header__effect">Fires arrows that chain lightning between nearby zombies. Excellent for crowd control and training loops. One of the more beginner-friendly upgrades to complete.</div>
+        </div>
+
+        <div class="callout callout--prereq" style="--storm:#c0c0c0;">
+          Requires: Wrath of the Ancients (wall buy, 500pts) · All 3 dragon heads fed · Power on
+        </div>
+
+        <div class="steps" style="--col:var(--wolf);">
+          <div class="step">
+            <h4>Find and Shoot the Four Wolf Paintings</h4>
+            <p>Locate four wall paintings hidden around the castle. They depict: a king sitting on his throne beside a wolf, a knight on horseback, a castle burning in flames, and a king struck by arrows. Shoot each painting with the Wrath of the Ancients to reveal a glowing wolf symbol beneath it.</p>
+          </div>
+          <div class="step">
+            <h4>Shoot the Red Flag at the Rocket Test Site</h4>
+            <p>Use the Wundersphere or teleporter to reach the Rocket Test Site (the outdoor launch area). Find the red flag on a pole and shoot it with the bow. This causes a wolf skull to drop to the ground.</p>
+          </div>
+          <div class="step">
+            <h4>Place the Skull on the Skeleton</h4>
+            <p>Pick up the wolf skull and take it to the nearby skeleton sitting against a wall in the test site area. Interact with the skeleton to place the skull. This summons a spectral ghost wolf.</p>
+          </div>
+          <div class="step">
+            <h4>Follow the Ghost Wolf and Feed It</h4>
+            <p>The ghost wolf wanders between fixed points around the castle. Follow it and get kills nearby — it feeds on the souls. At each location it stops, shoot the glowing wolf symbol on the wall above the spot where the wolf paws at the ground. You'll need to wallrun in some areas to reach the symbols.</p>
+          </div>
+          <div class="step">
+            <h4>Interact with the Wolf Symbol Box in the Undercroft</h4>
+            <p>Head to the Undercroft and find the glowing wolf symbol carved into the wall near the crafting bench. Interact with it — this begins the final charging phase.</p>
+          </div>
+          <div class="step">
+            <h4>Kill Zombies Until the Box is Fully Charged</h4>
+            <p>Stand near the wolf symbol box and kill zombies. The box glows brighter with each kill. Keep going until it flashes and releases the upgraded bow — pick it up off the ground.</p>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot__frame">
+            <div class="shot__icon">⬡</div>
+            <div class="shot__hint">Screenshot — Ghost wolf paw location with wall symbol above</div>
+          </div>
+          <div class="shot__cap">Each paw spot is marked by a faint glow on the ground. The wolf symbol above it becomes visible only after the wolf has pawed at that location.</div>
+        </div>
+
+        <div class="callout callout--tip">
+          The wolf only moves to its next location once you've collected all souls at the current one. Don't rush — kill 8–10 zombies at each paw spot before moving on.
+        </div>
+      </section>
+
+
+      <!-- ══════════════════════════════════════
+           VOID BOW
+      ══════════════════════════════════════ -->
+      <div class="bow-divider"><span>Bow Upgrade 2</span></div>
+
+      <section class="guide-sec" id="void-bow">
+        <div class="bow-header" style="--col:var(--void);">
+          <div class="bow-header__tag">Elemental Upgrade · Void</div>
+          <div class="bow-header__name">Void Bow</div>
+          <div class="bow-header__aka">Shadow Bow</div>
+          <div class="bow-header__effect">Creates a void singularity on impact that pulls nearby zombies in before detonating. Highly effective in tight corridors and chokepoints.</div>
+        </div>
+
+        <div class="callout callout--prereq" style="--storm:#9933dd;">
+          Requires: Wrath of the Ancients · All 3 dragon heads fed · Power on
+        </div>
+
+        <div class="steps" style="--col:var(--void);">
+          <div class="step">
+            <h4>Locate the Purple Symbols Near the Double Tap Machine</h4>
+            <p>Look up at the wall near the Double Tap Root Beer machine. Purple, glowing symbols are painted on the stonework. Shooting them causes a broken arrow to drop to the floor below. Pick it up.</p>
+          </div>
+          <div class="step">
+            <h4>Fire the Bow at the Gate Trap</h4>
+            <p>Equip the Wrath of the Ancients and shoot an arrow through the Gate Trap while it is active. The arrow passes through the electrified gate and picks up a purple charge. This reveals faint purple painted marks on surfaces around the map.</p>
+          </div>
+          <div class="step">
+            <h4>Find and Shoot the Purple Marks</h4>
+            <p>Track down the glowing purple marks revealed by the charged arrow and shoot each one with the bow to activate them. They appear on walls in the castle interior and courtyard areas.</p>
+          </div>
+          <div class="step">
+            <h4>Go to the Pyramid Symbol Box and Kill 20 Zombies</h4>
+            <p>Head into the Undercroft to the Pyramid room. Find the glowing arrow symbol box on the wall near the pyramid structure. Stand close to it and kill 20 zombies. The box absorbs their souls and glows brighter with each kill.</p>
+          </div>
+          <div class="step">
+            <h4>Collect the Void Bow</h4>
+            <p>After the 20th kill the box flashes and ejects the upgraded Void Bow. Pick it up from the ground near the pyramid.</p>
+          </div>
+        </div>
+
+        <div class="step-with-shot">
+          <div class="shot">
+            <div class="shot__frame">
+              <div class="shot__icon">⬡</div>
+              <div class="shot__hint">Screenshot — Purple wall symbols near Double Tap machine</div>
+            </div>
+            <div class="shot__cap">The symbols are faint until you look directly at them. They emit a soft purple light against the stone wall.</div>
+          </div>
+          <div class="shot">
+            <div class="shot__frame">
+              <div class="shot__icon">⬡</div>
+              <div class="shot__hint">Screenshot — Pyramid symbol box glowing in the Undercroft</div>
+            </div>
+            <div class="shot__cap">The kill zone around the pyramid box has a visible radius. Stay within it while farming the 20 kills.</div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ══════════════════════════════════════
+           FIRE BOW
+      ══════════════════════════════════════ -->
+      <div class="bow-divider"><span>Bow Upgrade 3</span></div>
+
+      <section class="guide-sec" id="fire-bow">
+        <div class="bow-header" style="--col:var(--fire);">
+          <div class="bow-header__tag">Elemental Upgrade · Fire</div>
+          <div class="bow-header__name">Fire Bow</div>
+          <div class="bow-header__aka">Rune Prison Bow</div>
+          <div class="bow-header__effect">Detonates in a spreading ring of fire on impact. Exceptional for clearing large groups. Becomes one of the strongest options at mid-to-high rounds when upgraded via Pack-a-Punch.</div>
+        </div>
+
+        <div class="callout callout--prereq" style="--storm:#ff4400;">
+          Requires: Wrath of the Ancients · All 3 dragon heads fed · Power on · Rocket Test Site access
+        </div>
+
+        <div class="steps" style="--col:var(--fire);">
+          <div class="step">
+            <h4>Retrieve the Arrow from the Top of the Clock Tower</h4>
+            <p>Climb or use the Wundersphere to reach the top of the Clock Tower. There is a glowing arrow resting at the highest accessible point. Pick it up — this is the base fire arrow used for the rest of the quest.</p>
+          </div>
+          <div class="step">
+            <h4>Shoot the Magma Rock after the Rocket Test Doors Open</h4>
+            <p>Wait for the rocket test countdown to complete and the large blast doors to open at the Rocket Test Site. Sprint outside and look to the right — on top of a nearby building there's a glowing orange magma rock. Shoot it with the Wrath of the Ancients.</p>
+          </div>
+          <div class="step">
+            <h4>Use the Jump Pad to Shoot Three Red Circles Mid-Air</h4>
+            <p>Use the launch pad (Wundersphere) in the area. While you're travelling through the air, three red glowing circles appear in the sky at fixed points. Aim and shoot each one before you land. You may need multiple attempts to hit all three in a single flight.</p>
+          </div>
+          <div class="step">
+            <h4>Stand in the Circles and Collect Souls</h4>
+            <p>After hitting all three circles, they appear on the ground as burning rings. Stand inside each one and kill zombies — the rings absorb their souls. Keep killing until magma erupts into the sky above, signalling the step is complete. Do this for all three circles.</p>
+          </div>
+          <div class="step">
+            <h4>Collect the Fire Bow</h4>
+            <p>Once the magma bursts from all three circles, the Fire Bow materialises near the centre of the area. Pick it up quickly as the souls finish transferring.</p>
+          </div>
+        </div>
+
+        <div class="shot">
+          <div class="shot__frame">
+            <div class="shot__icon">⬡</div>
+            <div class="shot__hint">Screenshot — Mid-air red circles during Wundersphere travel</div>
+          </div>
+          <div class="shot__cap">The circles only appear while you're airborne on the launch pad. Pre-aim before launching to hit all three in one pass.</div>
+        </div>
+
+        <div class="callout callout--tip">
+          The red circles move quickly across your field of view during the jump. Launch from the pad, immediately ADS, and sweep left to right. Most players miss at least one on the first attempt — just relaunch and try again.
+        </div>
+      </section>
+
+
+      <!-- ══════════════════════════════════════
+           STORM BOW
+      ══════════════════════════════════════ -->
+      <div class="bow-divider"><span>Bow Upgrade 4</span></div>
+
+      <section class="guide-sec" id="storm-bow">
+        <div class="bow-header" style="--col:var(--storm);">
+          <div class="bow-header__tag">Elemental Upgrade · Storm</div>
+          <div class="bow-header__name">Storm Bow</div>
+          <div class="bow-header__aka">Lightning Bow</div>
+          <div class="bow-header__effect">Charges then releases a lightning storm that arcs through large groups. Highest single-use damage output of all four bows. Slightly more steps to complete but worth every round it takes.</div>
+        </div>
+
+        <div class="callout callout--prereq" style="--storm:#ffdd00;">
+          Requires: Wrath of the Ancients · All 3 dragon heads fed · Power on · Death Ray activated
+        </div>
+
+        <div class="steps" style="--col:var(--storm);">
+          <div class="step">
+            <h4>Activate the Death Ray</h4>
+            <p>The Death Ray is the large electrical weapon mounted in the open courtyard. Interact with the control panel near it to turn it on. It will begin charging — you'll need it active for multiple steps. You can activate it during a round but it takes time to power up.</p>
+          </div>
+          <div class="step">
+            <h4>Shoot Three Bonfires with the Wrath of the Ancients</h4>
+            <p>Three small bonfire stands are positioned around the castle — in the courtyard, near the bastion, and along the keep wall. Shoot each one with the base bow to ignite them. They will glow orange when hit correctly.</p>
+          </div>
+          <div class="step">
+            <h4>Kill Zombies Near the Three Electrified Urns</h4>
+            <p>Find three large stone urns that crackle with electricity — they appear scattered around the courtyard area once the Death Ray is active. Kill zombies near each urn to charge it. The urn pulses brightly as it fills. Repeat for all three.</p>
+          </div>
+          <div class="step">
+            <h4>Charge Arrows Using the Urns, Then Reshoot the Bonfires</h4>
+            <p>Stand next to a fully charged urn and fire a bow shot — the arrow absorbs electricity from the urn as it passes through the field. Immediately shoot the arrow into one of the bonfires you lit in Step 2. Repeat this process for all three bonfires using three separate charged arrows.</p>
+          </div>
+          <div class="step">
+            <h4>Interact with the Electric Fog and Reshoot the Weather Vane</h4>
+            <p>A cloud of electric fog appears near the courtyard after completing Step 4. Interact with the fog — this transforms your arrow into a Reforged Arrow. Then locate the weather vane on one of the castle's stone spires and shoot it with the bow. This causes lightning to strike.</p>
+          </div>
+          <div class="step">
+            <h4>Place the Reforged Arrow on the Lightning Shrine</h4>
+            <p>Find the Lightning Symbol shrine on the ground in the courtyard. Place the Reforged Arrow on it by interacting with the shrine.</p>
+          </div>
+          <div class="step">
+            <h4>Kill 20 Zombies, Then Retrieve the Bow</h4>
+            <p>With the arrow placed, kill 20 zombies near the shrine — their souls charge the lightning strike. After the 20th kill the shrine explodes with light and ejects the Storm Bow. Pick it up.</p>
+          </div>
+        </div>
+
+        <div class="step-with-shot">
+          <div class="shot">
+            <div class="shot__frame">
+              <div class="shot__icon">⬡</div>
+              <div class="shot__hint">Screenshot — Electrified urn glowing when fully charged</div>
+            </div>
+            <div class="shot__cap">A charged urn crackles constantly and emits a visible electric field. Stand close and shoot through it — the arrow will visibly arc blue as it passes through.</div>
+          </div>
+          <div class="shot">
+            <div class="shot__frame">
+              <div class="shot__icon">⬡</div>
+              <div class="shot__hint">Screenshot — Lightning shrine with Reforged Arrow placed</div>
+            </div>
+            <div class="shot__cap">The shrine pulses with each zombie kill. Stay inside its radius while farming to ensure souls register.</div>
+          </div>
+        </div>
+
+        <div class="callout callout--tip">
+          The Storm Bow's charging mechanic takes slightly longer than the other bows to complete. Run the sequence between rounds rather than fighting through it while being pressured by a full horde.
+        </div>
+      </section>
+
+
+      <!-- ══════════════════════════════════════
+           RAGNAROK DG-4
+      ══════════════════════════════════════ -->
+      <section class="guide-sec" id="dg4">
+        <div class="sec-label">Buildable Wonder Weapon</div>
+        <h2 class="sec-title">Ragnarok DG-4</h2>
+        <p class="sec-desc">A three-part buildable directed-energy device. When placed on the ground it creates an electromagnetic gravity field that immobilises and kills zombies. Can also be held and fired as a handheld weapon for a close-range gravity slam. Essential for Easter Egg completion and crowd control at high rounds.</p>
+
+        <div class="callout callout--warn">
+          Two of the three parts require specific actions to spawn — they won't just be sitting on the map. Read each step carefully before the round starts so you're ready.
+        </div>
+
+        <div class="parts-grid">
+
+          <div class="part-card">
+            <div class="part-card__head">
+              <div class="part-num">01</div>
+              <div class="part-name">Part One — Kill the Panzersoldat</div>
+            </div>
+            <div class="part-card__body">
+              <p>The first Panzersoldat spawns automatically around rounds 8–12. When you kill it, it drops this DG-4 component as a loot drop — the same way the Fire Staff piece drops in Origins. Grab it off the ground before the end of the round.</p>
+              <ul class="spawn-list">
+                <li>Guaranteed drop from the first Panzersoldat kill</li>
+                <li>The Panzersoldat roams the full map — listen for its jetpack sound</li>
+                <li>Specialist weapons and the bow deal extra damage to it</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="part-card">
+            <div class="part-card__head">
+              <div class="part-num">02</div>
+              <div class="part-name">Part Two — Wundersphere Mid-Air Grab</div>
+            </div>
+            <div class="part-card__body">
+              <p>After turning on the Death Ray at least once, this part floats above the Bastion wall. It can only be grabbed while in mid-air via a Wundersphere. There are two launch pad locations that can reach it.</p>
+              <ul class="spawn-list">
+                <li>Wundersphere in the Upper Courtyard — launches toward the Bastion</li>
+                <li>Wundersphere on the second floor of the Lower Courtyard</li>
+                <li>Press Interact while airborne — the part is directly in your flight path</li>
+                <li>Death Ray must be activated first or the part won't be there</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="part-card">
+            <div class="part-card__head">
+              <div class="part-num">03</div>
+              <div class="part-name">Part Three — Rocket Launch Site Panel</div>
+            </div>
+            <div class="part-card__body">
+              <p>This part involves interacting with the rocket control panel during the launch countdown. Timing is critical.</p>
+              <ul class="spawn-list">
+                <li>Use the teleporter near the Pyramid room to reach the Rocket Launch Site</li>
+                <li>Wait roughly 2 minutes for the countdown timer to begin</li>
+                <li>Sprint to the control panel below the Pack-a-Punch location, near the stairs</li>
+                <li>Interact with it — the light changes from red to green</li>
+                <li>Return to the teleporter area and wait for all panel lights to go green</li>
+                <li>Interact with the controls — the part appears inside the teleporter room</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="shot">
+          <div class="shot__frame">
+            <div class="shot__icon">⬡</div>
+            <div class="shot__hint">Screenshot — DG-4 placed on the ground, active gravity field visible</div>
+          </div>
+          <div class="shot__cap">The placed DG-4 creates a visible gravitational dome. Zombies walking into it are slowed and crushed. Replace it after each use — it's a single-use deploy per pickup.</div>
+        </div>
+
+        <div class="callout callout--tip">
+          Build the DG-4 at any Crafting Station once all three parts are collected. There are crafting benches in the Undercroft and near the Upper Courtyard gate. The DG-4 is also required for a key Easter Egg step, so build it before attempting the main quest.
+        </div>
+      </section>
+
+
+      <!-- ══════════════════════════════════════
+           ROCKET SHIELD
+      ══════════════════════════════════════ -->
+      <section class="guide-sec" id="shield">
+        <div class="sec-label">Buildable — 3 Parts</div>
+        <h2 class="sec-title">Rocket Shield</h2>
+        <p class="sec-desc">A buildable shield that absorbs damage from behind, reducing incoming hits from regular zombies. Hold it up to block and melee with it for a powerful knockback strike. Each part has three possible spawn locations — only one spawns per game.</p>
+
+        <div class="callout callout--warn">
+          Each part has 3 possible spawn points but only one per game will be active. Check all three locations for each part — if it's not at the first spot, move to the next.
+        </div>
+
+        <div class="parts-grid">
+
+          <div class="part-card">
+            <div class="part-card__head">
+              <div class="part-num">01</div>
+              <div class="part-name">Part One — Lower Courtyard</div>
+            </div>
+            <div class="part-card__body">
+              <p>All three spawns are within the Lower Courtyard, to the right of spawn past the Double Tap machine.</p>
+              <ul class="spawn-list">
+                <li>On stacked boxes just inside the gate, immediately to the right</li>
+                <li>On small crates beside the stairs near the destroyed tank in the centre</li>
+                <li>On the ground near the zombie barrier by the far wall</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="part-card">
+            <div class="part-card__head">
+              <div class="part-num">02</div>
+              <div class="part-name">Part Two — Clock Tower / Upper Courtyard</div>
+            </div>
+            <div class="part-card__body">
+              <p>Spawns in the Clock Tower interior or the open courtyard outside it.</p>
+              <ul class="spawn-list">
+                <li>Inside the Clock Tower on or beside the tables near the dead zombie prop</li>
+                <li>On the ground in the main upper courtyard outside the church entrance</li>
+                <li>On the ledge near the clock face, accessible by climbing the interior stairs</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="part-card">
+            <div class="part-card__head">
+              <div class="part-num">03</div>
+              <div class="part-name">Part Three — Undercroft</div>
+            </div>
+            <div class="part-card__body">
+              <p>Located in the Undercroft below the church. Requires the power to be on and the low-gravity to be activated.</p>
+              <ul class="spawn-list">
+                <li>Activate low-gravity: stand on the 4 floor plates around the Pyramid until they glow</li>
+                <li>The part floats high up against the golden wall of the Undercroft</li>
+                <li>Look directly opposite the Crafting Bench, then look up</li>
+                <li>Jump in low-gravity to reach it, or wait for it to drift within reach</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="step-with-shot">
+          <div class="shot">
+            <div class="shot__frame">
+              <div class="shot__icon">⬡</div>
+              <div class="shot__hint">Screenshot — Part 1 spawn on stacked boxes, Lower Courtyard gate entrance</div>
+            </div>
+            <div class="shot__cap">Shield parts glow with a faint light. They're easy to miss if you're running — slow down and sweep each room.</div>
+          </div>
+          <div class="shot">
+            <div class="shot__frame">
+              <div class="shot__icon">⬡</div>
+              <div class="shot__hint">Screenshot — Part 3 floating against the gold wall in the Undercroft (low-gravity active)</div>
+            </div>
+            <div class="shot__cap">Low-gravity turns on when all four floor plates are glowing. The part is much easier to reach once you're floating.</div>
+          </div>
+        </div>
+
+        <div class="callout callout--tip">
+          Build the shield at any crafting bench as soon as you have all three parts. Prioritise the shield early — it's cheap to build (just parts, no points) and saves you perks in tight situations. The melee strike staggers any regular zombie in one hit.
+        </div>
+      </section>
+
+
+    </div><!-- /.guide-body -->
+  </main>
+
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="foot">
+    <div class="foot__inner">
+      <a href="index.html" class="foot__back">Back to All Maps</a>
+      <p class="foot__disc">Fan-made guide. Not affiliated with Activision or Treyarch. All game content belongs to their respective rights holders.</p>
+    </div>
+  </footer>
+
+
+  <script>
+    (function () {
+      var ham    = document.getElementById('ham');
+      var drawer = document.getElementById('drawer');
+      var links  = drawer.querySelectorAll('.dl');
+
+      function open()  { ham.setAttribute('aria-expanded', 'true');  drawer.setAttribute('aria-hidden', 'false'); drawer.classList.add('open'); }
+      function close() { ham.setAttribute('aria-expanded', 'false'); drawer.setAttribute('aria-hidden', 'true');  drawer.classList.remove('open'); }
+
+      ham.addEventListener('click', function () { ham.getAttribute('aria-expanded') === 'true' ? close() : open(); });
+      links.forEach(function (l) { l.addEventListener('click', close); });
+      document.addEventListener('click', function (e) { if (!ham.contains(e.target) && !drawer.contains(e.target)) close(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+      var nav = document.getElementById('mainNav');
+      function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 40); }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }());
+  </script>
+
+</body>
+</html>
